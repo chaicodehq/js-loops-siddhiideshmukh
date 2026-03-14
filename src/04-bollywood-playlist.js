@@ -34,5 +34,19 @@
  *   // => { count: 2, totalDuration: 300 }
  */
 export function buildPlaylist(songs, maxDuration) {
-  // Your code here
-}
+  if(!Array.isArray(songs)) return { count: 0, totalDuration: 0 };
+  if(typeof maxDuration !== "number" || maxDuration <= 0 || !isFinite(maxDuration)){
+    return {count: 0, totalDuration:0};
+  }
+
+  let count = 0, totalDuration = 0, i = 0;
+  while(i < songs.length ){
+    const song = songs[i];
+    i++;
+    if(typeof song !== "number" || song <= 0 || !isFinite(song)) continue;
+    if(totalDuration + song > maxDuration) break;
+    totalDuration += song;
+    count++;
+  }
+  return { count, totalDuration };
+}queueMicrotask
